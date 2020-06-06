@@ -5,25 +5,31 @@ import re
 
 webpage_html = req.get("https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating")
 
-#print(type(webpage_html.content))
 # print(webpage_html.status_code)# if 200 - page has been downloaded succesfully
 
 soup = BeautifulSoup(webpage_html.text, 'lxml')  # Specifying the HTML parser we want to use.
-
 for points in soup.find_all('div', {"class": "lister-item-content"}):
-    for points_1 in points.find_all('span', {"class": "lister-item-index unbold text-primary"}):
-        point1 = str(points_1.text)
-        print(point1, end=" ")
+    point1 = str(points.find('span', {"class": "lister-item-index unbold text-primary"}).get_text())
+    print(point1, end=" ")
 
-    for link in points.find_all('a', {'href': re.compile('/title/')}):
-        print(link.get_text(), end=" ")
-        break
-        # print("a", end =" ")
-    for points_3 in points.find_all('span', {"class": "runtime"}):
-        point3 = str(points_3.text)
-        print(point3, end=" ")
+    titlename = str(points.find('a', {'href': re.compile('/title/')}).get_text())
+    print(titlename, end=" ")
 
-    for points_2 in points.find_all('span', {"class": "lister-item-year text-muted unbold"}):
-        point2 = str(points_2.text)
-        print(point2, end=" ")
+    genrename = str(points.find('span', {"class": "genre"}).get_text()).strip()
+    print(genrename, end=" ")
+
+    yearentry = str(points.find('span', {"class": "lister-item-year text-muted unbold"}).get_text())
+    yearentry = yearentry.replace("(", "")
+    yearentry = yearentry.replace(")", "")
+    yearentry = yearentry.replace(" ", "")
+    print(yearentry.strip(), end=" ")
+
+    rating = points.find('div', {"class": "inline-block ratings-imdb-rating"})['data-value']
+    print(rating, end=" ")
+
+    # for loop1 in points.find_all('div',{"class":"inline-block ratings-imdb-rating"}):
+
+    # rating= str(points.find('strong').get_text()).strip()
+    # print(rating)
+
     print()
