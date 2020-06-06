@@ -5,7 +5,6 @@ import re
 webpage_html = req.get("https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating")
 
 # print(webpage_html.status_code)# if 200 - page has been downloaded succesfully
-
 soup = BeautifulSoup(webpage_html.text, 'lxml')  # Specifying the HTML parser we want to use.
 for points in soup.find_all('div', {"class": "lister-item-content"}):
     point1 = str(points.find('span', {"class": "lister-item-index unbold text-primary"}).get_text())
