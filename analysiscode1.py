@@ -1,5 +1,4 @@
 import requests as req  # to Make a request to a web page, and print the response text
-
 from bs4 import BeautifulSoup  # Beautiful Soup is a Python library for pulling data out of HTML and XML files
 import re
 
