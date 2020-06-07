@@ -26,7 +26,6 @@ for points in soup.find_all('div', {"class": "lister-item-content"}):
     print(rating, end=" ")
 
     # for loop1 in points.find_all('div',{"class":"inline-block ratings-imdb-rating"}):
-
     # rating= str(points.find('strong').get_text()).strip()
     # print(rating)
 
