@@ -50,7 +50,6 @@ for i in movielist:
     subjsondict["Rating"] = i[4]
     jsondict[i[0]]=(subjsondict)
 
-
 jsondict_dump = json.dumps(jsondict)#to convert to json format
 print(jsondict_dump)
 
