@@ -21,7 +21,7 @@ webpage_html = req.get("https://www.imdb.com/search/title/?count=100&groups=top_
 # print(webpage_html.status_code)# if 200 - page has been downloaded succesfully
 soup = BeautifulSoup(webpage_html.text, 'lxml')  # Specifying the HTML parser we want to use.
 for points in soup.find_all('div', {"class": "lister-item-content"}):
-#movie=[]
+
     point1 = points.find('span', {"class": "lister-item-index unbold text-primary"}).get_text().replace(".","")
     titlename = points.find('a', {'href': re.compile('/title/')}).get_text()
     genrename = points.find('span', {"class": "genre"}).get_text().strip()
@@ -32,8 +32,6 @@ for points in soup.find_all('div', {"class": "lister-item-content"}):
     rating = points.find('div', {"class": "inline-block ratings-imdb-rating"})['data-value']
 
     jsondict[point1]=dictionary_func(titlename,genrename,yearentry,rating)
-
-#jsondict_dump = json.dumps(jsondict)#to convert to json format
 
 with open('jsondict.json', 'w') as outfile :
     json.dump(jsondict,outfile)
